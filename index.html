@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ishmeet’s Bakery</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Dancing+Script&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<style>
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 120px; /* keeps sections below sticky header */
+}
+
+/* Body and Background */
+body {
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #7a4125;
+  background-image: url("cake.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  scroll-behavior: smooth;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(255,255,255,0.25);
+  z-index: -1;
+}
+
+/* Header */
+header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px 80px;
+  border-radius: 10px;
+  position: sticky;
+  top: 0;
+  background-color: rgba(255,255,255,0.95);
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  min-width: 180px;
+}
+
+.logo-container img {
+  height: 100px;
+  margin-right: 20px;
+}
+
+.bold-text {
+  font-family: 'Amatic SC', cursive;
+  font-weight: 700;
+  font-size: 40px;
+  color:#7a4125;
+}
+
+.fancy-text {
+  font-family: 'Dancing Script', cursive;
+  font-weight: 400;
+  font-size: 44px;
+  color: #7a4125;
+}
+
+nav {
+  display: flex;
+  justify-content: flex-start;
+  flex: 2 1 auto;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  text-decoration: none;
+  font-weight: 500;
+  color: #7a4125;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #ff99aa;
+}
+
+#about .section-image {
+  display: block;       /* makes it a block element */
+  max-width: 80%;       /* image will not exceed 90% of the container */
+  margin: 20px auto;    /* centers it horizontally and adds vertical spacing */
+  border-radius: 15px;  /* optional: rounded corners */
+  height: auto;         /* keeps the aspect ratio */
+}
+
+/* Sections */
+section {
+  max-width: 1000px;
+  width: 90%;
+  margin: 40px auto;
+  padding: 30px;
+  background: linear-gradient(to bottom right, rgba(251,250,250,0.95), rgba(255,255,255,0.9));
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+h2 {
+  font-family: 'Amatic SC', cursive;
+  font-size: 3rem;
+  text-align: center;
+  color: #7a4125;
+  margin-bottom: 20px;
+}
+
+p {
+  text-align: center;
+  font-size: 1rem;
+  color: #7a4125;
+  margin-bottom: 20px;
+}
+
+
+/* Menu Grid */
+
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 20px;
+  margin-top: 30px;
+}
+.menu-item {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.menu-item img {
+  width: 100%;
+  height: 320px;
+  object-fit: contain;
+  display: block;
+  background: #fff;
+  transition: transform 0.3s;
+}
+
+.menu-item:hover img {
+  transform: scale(1.1);
+}
+
+.menu-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(183, 180, 180, 0.6);
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: all 0.3s ease;
+}
+
+.menu-item:hover .menu-info {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.menu-info h3 {
+  margin: 5px 0 2px;
+  font-family: 'Amatic SC', cursive;
+  font-size: 1.1rem;
+}
+
+.menu-info p {
+  font-size: 0.85rem;
+  margin: 0;
+}
+/*Contact Form */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+input, textarea {
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #e0d4d1;
+  font-size: 1rem;
+  width: 100%;
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus {
+  border-color: #ffb6c1;
+  box-shadow: 0 0 10px rgba(255,182,193,0.4);
+}
+
+button {
+  background-color: #ffb6c1;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 50px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-family:'Open Sans', sans-serif;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #ff99aa;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(255,182,193,0.3);
+}
+
+
+/* Contact Info */
+.contact-info div {
+  margin: 5px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #7a4125;
+  font-weight: 500;
+}
+
+.contact-info i {
+  color: #ffb6c1;
+}
+
+.contact-info a {
+  color: #7a4125;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.contact-info a:hover {
+  color: #ff99aa;
+  text-decoration: underline;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 5px;
+}
+
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #7a4125;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.social-links a i {
+  color: #ffb6c1;
+}
+
+.social-links a:hover {
+  color: #ff99aa;
+  transform: translateY(-1px);
+}
+/* Mission & Values Section */
+#values {
+  max-width: 1000px;
+  width: 90%;
+  margin: 60px auto; /* more space from top and bottom */
+  padding: 40px 20px;
+  background: linear-gradient(to bottom right, rgba(251,250,250,0.95), rgba(255,255,255,0.9));
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  text-align: center;
+}
+
+#values h2 {
+  font-family: 'Amatic SC', cursive;
+  font-size: 3rem;
+  color: #7a4125;
+  margin-bottom: 40px;
+}
+
+.values-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.value-box {
+  flex: 1 1 250px; /* each box is minimum 250px, grows as needed */
+  background: #fff;
+  padding: 25px 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.value-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.value-box h3 {
+  font-family: 'Amatic SC', cursive;
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: #7a4125;
+}
+
+.value-box p {
+  font-size: 1rem;
+  color: #7a4125;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .values-container {
+    gap: 15px;
+  }
+  .value-box {
+    flex: 1 1 220px;
+  }
+}
+
+@media (max-width: 768px) {
+  .values-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .value-box {
+    width: 80%;
+    margin-bottom: 20px;
+  }
+}
+
+/* Responsive */
+@media (max-width: 1024px){
+  .logo-container img { height: 70px; margin-right: 15px; }
+  .bold-text { font-size: 24px; }
+  .fancy-text { font-size: 20px; }
+  nav a { font-size: 0.95rem; gap: 15px; }
+}
+
+@media (max-width: 768px){
+  header { flex-direction: column; align-items: center; padding: 10px; }
+  .logo-container { justify-content: center; margin-bottom: 10px; }
+  nav { justify-content: center; gap: 12px; margin-bottom: 5px; }
+  .bold-text { font-size: 22px; }
+  .fancy-text { font-size: 18px; }
+}
+
+@media (max-width: 480px){
+  .logo-container img { height: 60px; margin-right: 10px; }
+  .bold-text { font-size: 18px; }
+  .fancy-text { font-size: 14px; display: block; text-align: center; }
+  nav { gap: 8px; flex-direction: column; align-items: center; }
+  nav a { font-size: 0.9rem; }
+}
+
+
+#cake-carousel {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff9f7;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+#cake-carousel h2 {
+  text-align: center;
+  font-family: 'Amatic SC', cursive;
+  font-size: 2.5rem;
+  color: #7a4125;
+  margin-bottom: 20px;
+}
+
+
+.carousel {
+  display: flex;
+  overflow-x: hidden;
+  padding: 20px;
+  gap: 20px; /* space between each carousel item */
+  scroll-behavior: smooth;
+}
+
+.carousel-item {
+  flex: 0 0 auto;
+  width: 250px;
+  margin-right: 20px;
+  height: 300px;
+
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  position: relative; /* for overlay */
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.carousel-item h3 {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.5); /* semi-transparent overlay */
+  color: #fff;
+  font-family: 'Amatic SC', cursive;
+  font-size: 1rem;
+  margin: 0;
+  padding: 5px;
+  text-align: center;
+}
+
+.carousel-item:hover {
+  transform: scale(1.05);
+}
+.carousel-track {
+  display: flex;
+  width: calc(250px * 57); /* 57 images x 250px each */
+  animation: scroll 180s linear infinite; /* smoother, slower */
+  gap: 20px; /* ensures spacing between boxes */
+}
+.carousel-item p {
+  margin-top: 8px;
+  font-family: 'Amatic SC', cursive;
+  color: #7a4125;
+}
+
+/* Smooth scrolling animation */
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .carousel-item {
+    flex: 0 0 150px;
+  }
+
+  .carousel-item img {
+    height: 120px;
+  }
+}
+#contact form {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 30px;
+  background: #fff9f7; /* soft bakery white-pink */
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="logo-container">
+    <img src="logo.jpeg" alt="Bakery Logo">
+    <span class="logo-text">
+      <span class="bold-text">Ishmeet’s Treats</span>
+      <span class="fancy-text"> - A Delicious Treat To Your Tastebuds</span>
+    </span>
+  </div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#menu">Menu</a>
+    
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<!-- Home Section -->
+<section id="home">
+ 
+  <h2>Welcome to Ishmeet’s Treats</h2>
+  <p>Delicious cakes, cookies, and treats made with love in Amritsar.</p>
+  <img class="section-image" src="https://via.placeholder.com/800x400.png?text=Cakes" alt="Cakes">
+</section>
+
+
+<!-- About Section -->
+<section id="about">
+  <h2>About Us</h2>
+
+    <p>
+    Founded in <strong>August 2023</strong>, Ishmeet’s Treats was born out of a passion for baking and a dream to share homemade happiness with the community. 
+  </p>
+   <img class="section-image" src="about.jpeg" alt="Bakery Interior">
+  <p>
+    At Ishmeet’s Treats, we specialize in crafting <strong>cookies</strong>, <strong>brownies</strong>, <strong>pastries</strong>, <strong>cakes</strong>, and <strong>chocolates</strong>. 
+    Each item is carefully prepared using high-quality ingredients, ensuring freshness, flavor, and a perfect balance of taste and texture. 
+    From everyday indulgences to special occasions, our baked goods are designed to delight both the eye and the palate. 
+  </p>
+  <p>
+    As a professional home bakery, our focus is on bringing <strong>creativity and precision</strong> to every order. 
+    Whether it’s a custom-designed cake for a milestone celebration, a box of decadent brownies for gifting, or a simple cookie to brighten your day, 
+    we believe that every treat should be as unique as the person enjoying it. 
+  </p>
+  <p>
+    Our journey is fueled by the love of our customers and the joy of creating something memorable. 
+    With every recipe perfected and every detail thoughtfully crafted, Ishmeet’s Treats aims to be your go-to bakery in Amritsar — a place where homemade warmth meets professional standards. 
+  </p>
+ </section>
+<section id="values">
+  <h2>Our Mission & Values</h2>
+  <div class="values-container">
+    <div class="value-box">
+      <h3>Quality</h3>
+      <p>We use only premium ingredients to ensure every bite is fresh, flavorful, and unforgettable.</p>
+    </div>
+    <div class="value-box">
+      <h3>Creativity</h3>
+      <p>From custom cakes to unique flavors, we bring innovation and artistry to every product we bake.</p>
+    </div>
+    <div class="value-box">
+      <h3>Customer Happiness</h3>
+      <p>Your joy is our success. We strive to create treats that make celebrations sweeter and everyday moments special.</p>
+    </div>
+  </div>
+
+</section>
+
+<section id="menu">
+  <h2>Our Menu</h2>
+  <div class="menu-grid">
+
+    <!-- Cakes -->
+    <div class="menu-item">
+      <img src="CHOCOTRUFFLE.png" alt="Chocolate Truffle Cake">
+      <div class="menu-info">
+        <h3>Chocolate Truffle Cake</h3>
+        <p>Rich chocolate layers with creamy truffle filling</p>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <img src="FRUITcake.PNG" alt="Fresh Fruit Cake">
+      <div class="menu-info">
+        <h3>Fresh Fruit Cake</h3>
+        <p>Loaded with seasonal fresh fruits for a natural sweetness</p>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <img src="Butterscotchcake.png" alt="Butterscotch Cake">
+      <div class="menu-info">
+        <h3>Butterscotch Cake</h3>
+        <p>Classic butterscotch flavor with soft, creamy frosting</p>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <img src="PINEAPPLECAKE.png" alt="Pineapple Cake">
+      <div class="menu-info">
+        <h3>Pineapple Cake</h3>
+        <p>Sweet pineapple chunks baked into a soft sponge</p>
+      </div>
+    </div>
+
+    <!-- Cheesecakes -->
+    <div class="menu-item">
+      <img src="biscoffcheesecake.png" alt="Biscoff Cheesecake">
+      <div class="menu-info">
+        <h3>Biscoff Cheesecake</h3>
+        <p>Creamy cheesecake topped with crunchy Biscoff crumbs</p>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <img src="blueberrycheesecake.png" alt="Blueberry Cheesecake">
+      <div class="menu-info">
+        <h3>Blueberry Cheesecake</h3>
+        <p>Fresh blueberries with velvety cheesecake filling</p>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <img src="mangocheesecake.png" alt="Mango Cheesecake">
+      <div class="menu-info">
+        <h3>Mango Cheesecake</h3>
+        <p>Sweet mango puree layered with creamy cheesecake</p>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <img src="NutellaBiscoffcheesecake.png" alt="Nutella Biscoff Cheesecake">
+      <div class="menu-info">
+        <h3>Nutella Biscoff Cheesecake</h3>
+        <p>Decadent Nutella and Biscoff flavors in one dessert</p>
+      </div>
+    </div>
+
+    <!-- Pastries -->
+    <div class="menu-item">
+      <img src="Vanillacake.png" alt="Vanilla Cake">
+      <div class="menu-info">
+        <h3>Vanilla Cake</h3>
+        <p>Classic soft vanilla sponge with creamy frosting</p>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <img src="strawberrycake.png" alt="Strawberry Cake">
+      <div class="menu-info">
+        <h3>Strawberry Cake</h3>
+        <p>Fresh strawberries layered on a fluffy cake base</p>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <img src="triocake.png" alt="Trio Cake">
+      <div class="menu-info">
+        <h3>Trio Cake</h3>
+        <p>Three layers of chocolate, vanilla, and strawberry</p>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <img src="redvelvet.png" alt="Red Velvet Cake">
+      <div class="menu-info">
+        <h3>Red Velvet Cake</h3>
+        <p>Rich red velvet sponge with cream cheese frosting</p>
+      </div>
+    </div>
+
+    <!-- Gift Hampers -->
+    <div class="menu-item">
+      <img src="hamper.png" alt="Gift Hampers">
+      <div class="menu-info">
+        <h3>Gift Hampers</h3>
+        <p>Perfect selection of treats for gifting or celebrations</p>
+      </div>
+    </div>
+
+    <!-- Brownies -->
+    <div class="menu-item">
+      <img src="Dryfruitcake.png" alt="Dryfruit Brownies">
+      <div class="menu-info">
+        <h3>Dryfruit Brownies</h3>
+        <p>Rich chocolate brownies loaded with dry fruits</p>
+      </div>
+    </div>
+
+    <!-- Cookies -->
+    <div class="menu-item">
+      <img src="REDVELVETCOOKIES.png" alt="Red Velvet Cookies">
+      <div class="menu-info">
+        <h3>Red Velvet Cookies</h3>
+        <p>Soft cookies with signature red velvet flavor</p>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <img src="MULTIGRAIN.png" alt="Multigrain Cookies">
+      <div class="menu-info">
+        <h3>Multigrain Cookies</h3>
+        <p>Healthy cookies made with wholesome grains</p>
+      </div>
+    </div>
+
+    <!-- Chocolates & Cupcakes -->
+    <div class="menu-item">
+      <img src="handmadechocolates.png" alt="Handmade Chocolates">
+      <div class="menu-info">
+        <h3>Handmade Chocolates</h3>
+        <p>Artisan chocolates crafted with care and quality ingredients</p>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      <img src="Chocolate Blueberry cupcake.png" alt="Chocolate Blueberry Cupcake">
+      <div class="menu-info">
+        <h3>Chocolate Blueberry Cupcake</h3>
+        <p>Soft cupcake topped with chocolate and fresh blueberries</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+<section id="cake-carousel">
+  <h2>Our Customized Cakes</h2>
+  <div class="carousel">
+    <div class="carousel-track">
+      <div class="carousel-item">
+        <img src="1.png" alt="Chocolate Truffle Cake">
+      
+      </div>
+      <div class="carousel-item">
+        <img src="2.png" alt="Red Velvet Cake">
+       
+      </div>
+      <div class="carousel-item">
+        <img src="3.png" alt="Fresh Fruit Cake">
+     
+      </div>
+      <div class="carousel-item">
+        <img src="4.png" alt="Vanilla Cream Cake">
+        
+      </div>
+      <div class="carousel-item">
+        <img src="5.png" alt="Butterscotch Cake">
+    
+      </div>
+      <div class="carousel-item">
+        <img src="6.png" alt="Pineapple Cake">
+       
+      </div>
+      <div class="carousel-item">
+        <img src="7.png" alt="Black Forest Cake">
+        
+      </div>
+      <div class="carousel-item">
+        <img src="8.png" alt="Custom Celebration Cakes">
+        
+      </div>
+
+      <div class="carousel-item">
+        <img src="9.png" alt="Custom Celebration Cakes">
+        
+      </div>
+
+      <div class="carousel-item">
+        <img src="10.png" alt="Custom Celebration Cakes">
+        
+      </div>
+
+      <div class="carousel-item">
+        <img src="11.png" alt="Custom Celebration Cakes">
+        
+      </div>
+
+      <div class="carousel-item">
+        <img src="12.png" alt="Custom Celebration Cakes">
+        
+      </div>
+
+      <div class="carousel-item">
+        <img src="13.png" alt="Custom Celebration Cakes">
+        
+      </div>
+
+      <div class="carousel-item">
+        <img src="14.png" alt="Custom Celebration Cakes">
+        
+      </div>
+
+      <div class="carousel-item">
+        <img src="15.png" alt="Custom Celebration Cakes">
+        
+      </div>
+      <div class="carousel-item">
+        <img src="16.png" alt="Custom Celebration Cakes">
+        
+      </div>
+
+
+
+<div class="carousel-item">
+  <img src="18.png" alt="Cake 18">
+</div>
+<div class="carousel-item">
+  <img src="19.png" alt="Cake 19">
+</div>
+<div class="carousel-item">
+  <img src="20.png" alt="Cake 20">
+</div>
+<div class="carousel-item">
+  <img src="21.png" alt="Cake 21">
+</div>
+<div class="carousel-item">
+  <img src="22.png" alt="Cake 22">
+</div>
+<div class="carousel-item">
+  <img src="23.png" alt="Cake 23">
+</div>
+<div class="carousel-item">
+  <img src="24.png" alt="Cake 24">
+</div>
+<div class="carousel-item">
+  <img src="25.png" alt="Cake 25">
+</div>
+<div class="carousel-item">
+  <img src="26.png" alt="Cake 26">
+</div>
+<div class="carousel-item">
+  <img src="27.png" alt="Cake 27">
+</div>
+<div class="carousel-item">
+  <img src="28.png" alt="Cake 28">
+</div>
+<div class="carousel-item">
+  <img src="29.png" alt="Cake 29">
+</div>
+<div class="carousel-item">
+  <img src="30.png" alt="Cake 30">
+</div>
+<div class="carousel-item">
+  <img src="31.png" alt="Cake 31">
+</div>
+<div class="carousel-item">
+  <img src="32.png" alt="Cake 32">
+</div>
+<div class="carousel-item">
+  <img src="33.png" alt="Cake 33">
+</div>
+<div class="carousel-item">
+  <img src="34.png" alt="Cake 34">
+</div>
+<div class="carousel-item">
+  <img src="35.png" alt="Cake 35">
+</div>
+<div class="carousel-item">
+  <img src="36.png" alt="Cake 36">
+</div>
+<div class="carousel-item">
+  <img src="37.png" alt="Cake 37">
+</div>
+<div class="carousel-item">
+  <img src="38.png" alt="Cake 38">
+</div>
+<div class="carousel-item">
+  <img src="39.png" alt="Cake 39">
+</div>
+<div class="carousel-item">
+  <img src="40.png" alt="Cake 40">
+</div>
+<div class="carousel-item">
+  <img src="41.png" alt="Cake 41">
+</div>
+<div class="carousel-item">
+  <img src="42.png" alt="Cake 42">
+</div>
+<div class="carousel-item">
+  <img src="43.png" alt="Cake 43">
+</div>
+<div class="carousel-item">
+  <img src="44.png" alt="Cake 44">
+</div>
+<div class="carousel-item">
+  <img src="45.png" alt="Cake 45">
+
+</div>
+<div class="carousel-item">
+  <img src="47.png" alt="Cake 47">
+</div>
+<div class="carousel-item">
+  <img src="48.png" alt="Cake 48">
+</div>
+<div class="carousel-item">
+  <img src="49.png" alt="Cake 49">
+</div>
+<div class="carousel-item">
+  <img src="50.png" alt="Cake 50">
+</div>
+<div class="carousel-item">
+  <img src="51.png" alt="Cake 41">
+</div>
+<div class="carousel-item">
+  <img src="52.png" alt="Cake 42">
+</div>
+<div class="carousel-item">
+  <img src="53.png" alt="Cake 43">
+</div>
+<div class="carousel-item">
+  <img src="54.png" alt="Cake 44">
+</div>
+<div class="carousel-item">
+  <img src="55.png" alt="Cake 45">
+</div>
+<div class="carousel-item">
+  <img src="56.png" alt="Cake 46">
+</div>
+<div class="carousel-item">
+  <img src="57.png" alt="Cake 47">
+      <!-- Add more items as needed -->
+    </div>
+  </div>
+</section>
+    <!-- Add more slides as needed -->
+  
+<!-- Contact Section -->
+<section id="contact">
+  <h2>Contact Us</h2>
+  <p>Fill out the form below and we will get back to you as soon as possible.</p>
+  <form>
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
+    <input type="text" placeholder="Subject" required>
+    <textarea rows="4" placeholder="Your Message" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+
+  <div class="contact-info">
+    <div><i class="fas fa-envelope"></i> <a href="mailto:Ishmeettreats@gmail.com">Ishmeettreats@gmail.com</a></div>
+    <div><i class="fas fa-map-marker-alt"></i> Based in Amritsar, Punjab, India</div>
+    <div class="social-links">
+      <a href="https://instagram.com/ishmeets_treats" target="_blank">
+        <i class="fab fa-instagram"></i> Follow us on Instagram
+      </a>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
+
